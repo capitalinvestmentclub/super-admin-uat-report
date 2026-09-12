@@ -102,7 +102,7 @@
     document.querySelector('#metric-open').textContent = open;
     document.querySelector('#metric-fixed').textContent = fixed;
     document.querySelector('#metric-closed').textContent = closed;
-    document.querySelector('#release-reason').textContent = `${urgent} critical/high findings remain open; 11 scenarios are blocked by missing deployed prerequisites.`;
+    document.querySelector('#release-reason').textContent = `${urgent} critical/high findings remain open across the 10 scoped priority scenarios.`;
   }
 
   function optionCounts(property, transform = (value) => value) {
