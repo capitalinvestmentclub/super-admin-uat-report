@@ -1,0 +1,1251 @@
+{
+  "runId": "2026-09-14-targeted-chrome",
+  "state": "COMPLETED — targeted partial-scope retest; original campaign not closed",
+  "updatedAt": "2026-09-14T04:54:48Z",
+  "scope": "User-approved 90-minute risk-based retest of affected critical/high findings. Functional journey execution is separate from responsive inspection.",
+  "frontend": "https://planar-truck-361704.uc.r.appspot.com",
+  "api": "https://cicdevapi.uc.r.appspot.com",
+  "browser": "Google Chrome",
+  "deployments": {
+    "webapp": {
+      "commit": "5061ed8dcb1b62fcba7e8bd411681426b2a52fb9",
+      "version": "auth-34793703967-1"
+    },
+    "webapi": {
+      "commit": "42dd14b8d7bb897b69759d974e0bc23023013057",
+      "version": "policy-34792703930-1"
+    },
+    "notificationservice": {
+      "commit": "515196429af878b68d3d0e2f483f25776a2b073f",
+      "version": "20260914t002754"
+    }
+  },
+  "findings": [
+    {
+      "id": "ADM050-EMAIL-001",
+      "title": "KYC confirmation link fails TLS validation",
+      "scenario": "ADM-050",
+      "status": "PARTIAL",
+      "summary": "An existing controlled KYC confirmation email opened the canonical deployed HTTPS verification route without a TLS interstitial, then redirected the existing member session to its dashboard. Confirmation acceptance was not established.",
+      "steps": [
+        "Open the existing controlled KYC Email Confirmation message dated 11 September at 22:43 local time.",
+        "Follow Confirm your email through the ordinary browser link.",
+        "Observe the canonical deployed HTTPS verification route without a TLS interstitial.",
+        "Observe redirection of the existing member session to its dashboard; do not infer token acceptance from that redirect."
+      ],
+      "evidence": [
+        {
+          "url": "assets/targeted-20260914/ADM050-EMAIL-observation.md",
+          "label": "Sanitized confirmation-link transport observation"
+        }
+      ],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "390×844",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "768×1024",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1024×768",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1280×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1440×900",
+          "status": "NOT RUN",
+          "evidence": []
+        }
+      ],
+      "limitations": "The email predates deployment. Fresh confirmation generation, token acceptance and changed verification state are NOT RUN. No token URL, raw Gmail screenshot or full mailbox address is published. Generic new-message delivery was tested separately under SUP-F002."
+    },
+    {
+      "id": "ADM052-FIN-001",
+      "title": "Assessor is not credited after successful capture",
+      "scenario": "ADM-052",
+      "status": "NOT RUN",
+      "summary": "No new assessment capture was executed in this targeted run.",
+      "steps": [],
+      "evidence": [],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "390×844",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "768×1024",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1024×768",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1280×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1440×900",
+          "status": "NOT RUN",
+          "evidence": []
+        }
+      ],
+      "limitations": "Next check: capture a controlled assessment and reconcile assessor credit, payer debit, both wallets and ledger. Historical journal balance alone does not prove assessor credit."
+    },
+    {
+      "id": "ADM052-CAN-001",
+      "title": "Cancelled assessment keeps reserved funds",
+      "scenario": "ADM-052",
+      "status": "NOT RUN",
+      "summary": "No assessment cancellation/reservation release was executed in this targeted run.",
+      "steps": [],
+      "evidence": [],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "390×844",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "768×1024",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1024×768",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1280×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1440×900",
+          "status": "NOT RUN",
+          "evidence": []
+        }
+      ],
+      "limitations": "Next check: cancel an isolated funded assessment and verify released reservation, available balance and immutable ledger entries after reload."
+    },
+    {
+      "id": "ADM055-LEDGER-001",
+      "title": "Historical bid ledger values are internally inconsistent",
+      "scenario": "ADM-055",
+      "status": "PARTIAL",
+      "summary": "The filtered historical synthetic takeover journal returned eight rows across two bid submit/reject cycles. Read-only reconciliation found each row balanced across 14 account columns, all controls Valid, and each account aggregate 0.00.",
+      "steps": [
+        "Open Admin Ledger and apply the controlled historical takeover description filter.",
+        "Confirm eight rows corresponding to two 100.00/100.01 bid submit/reject cycles.",
+        "Read the rendered ledger cells and sum all 14 account columns per row; verify every row totals zero and controls show Valid.",
+        "Verify aggregate values across the 14 accounts are 0.00.",
+        "Inspect the visible journal cards/reference rows and table container at all six exact Chrome sizes."
+      ],
+      "evidence": [
+        {
+          "url": "assets/targeted-20260914/ADM055-historical-journal-1440x900.png",
+          "label": "Filtered historical eight-row journal; account columns extend horizontally"
+        }
+      ],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "PARTIAL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM055-historical-journal-360x800.png",
+              "label": "360×800 visible historical journal portion"
+            }
+          ],
+          "summary": "Visible journal/reference rows inspected; financial account columns extend offscreen. Full horizontal column access not yet verified."
+        },
+        {
+          "size": "390×844",
+          "status": "PARTIAL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM055-historical-journal-390x844.png",
+              "label": "390×844 visible historical journal portion"
+            }
+          ],
+          "summary": "Visible journal/reference rows inspected; financial account columns extend offscreen. Full horizontal column access not yet verified."
+        },
+        {
+          "size": "768×1024",
+          "status": "PARTIAL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM055-historical-journal-768x1024.png",
+              "label": "768×1024 visible historical journal portion"
+            }
+          ],
+          "summary": "Visible journal/reference rows inspected; financial account columns extend offscreen. Full horizontal column access not yet verified."
+        },
+        {
+          "size": "1024×768",
+          "status": "PARTIAL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM055-historical-journal-1024x768.png",
+              "label": "1024×768 visible historical journal portion"
+            }
+          ],
+          "summary": "Visible journal/reference rows inspected; financial account columns extend offscreen. Full horizontal column access not yet verified."
+        },
+        {
+          "size": "1280×800",
+          "status": "PARTIAL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM055-historical-journal-1280x800.png",
+              "label": "1280×800 visible historical journal portion"
+            }
+          ],
+          "summary": "Visible journal/reference rows inspected; financial account columns extend offscreen. Full horizontal column access not yet verified."
+        },
+        {
+          "size": "1440×900",
+          "status": "PARTIAL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM055-historical-journal-1440x900.png",
+              "label": "1440×900 visible historical journal portion"
+            }
+          ],
+          "summary": "Visible journal/reference rows inspected; financial account columns extend offscreen. Full horizontal column access not yet verified."
+        }
+      ],
+      "limitations": "Historical double-entry reconciliation only. No new bid, refund or capture was executed; current wallet and running-balance cross-checks remain NOT RUN. All screenshots show only part of the horizontally scrolling account table, so complete six-size column usability is not claimed."
+    },
+    {
+      "id": "ADM050-EVIDENCE-001",
+      "title": "Required no-TIN evidence can be omitted",
+      "scenario": "ADM-050",
+      "status": "NOT RUN",
+      "summary": "The deployed no-TIN evidence submission branch was not executed in this targeted run.",
+      "steps": [],
+      "evidence": [],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "390×844",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "768×1024",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1024×768",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1280×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1440×900",
+          "status": "NOT RUN",
+          "evidence": []
+        }
+      ],
+      "limitations": "Next check: use a controlled eligible applicant, prove missing required declaration evidence blocks submission, then upload authorized evidence and verify saved/reloaded state. Prior local tests do not replace this deployed branch."
+    },
+    {
+      "id": "ADM050-REVIEW-001",
+      "title": "Reviewer can complete queried or unreviewed evidence",
+      "scenario": "ADM-050",
+      "status": "PARTIAL",
+      "summary": "Passed negative guard: normal Submit rejected an application with required identifiers still Pending review. The real API returned HTTP 409, and reload left queue counts unchanged.",
+      "steps": [
+        "Open the controlled individual review with required evidence still Pending review.",
+        "Use the normal Submit action.",
+        "Observe HTTP 409 from /api/v1/kyc/kycSubmit: required NRIC/FIN, legal name, date of birth and residential address must be reviewed and accepted.",
+        "Reload; confirm Pending remains 22 and Completed remains 4."
+      ],
+      "evidence": [
+        {
+          "url": "assets/targeted-20260914/ADM050-REVIEW-001-unreviewed-submit.png",
+          "label": "Pending-review evidence and unchanged queue context"
+        }
+      ],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "390×844",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "768×1024",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1024×768",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1280×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1440×900",
+          "status": "NOT RUN",
+          "evidence": []
+        }
+      ],
+      "limitations": "Positive fully-reviewed submission and the explicit Queried branch are NOT RUN. This subcheck does not close the original finding. No six-size replay of this guard was performed."
+    },
+    {
+      "id": "ADM051-AGR-001",
+      "title": "View agreement CTA opens the wrong destination",
+      "scenario": "ADM-051",
+      "status": "NOT RUN",
+      "summary": "The accepted-bid email agreement continuation was not executed in this targeted run.",
+      "steps": [],
+      "evidence": [],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "390×844",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "768×1024",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1024×768",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1280×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1440×900",
+          "status": "NOT RUN",
+          "evidence": []
+        }
+      ],
+      "limitations": "Next check: use the authorized signatory for a controlled accepted bid, follow the real email CTA to the exact current agreement and verify both-party signing continuation. No legal commitment was executed in this run."
+    },
+    {
+      "id": "ADM051-WDR-001",
+      "title": "Withdrawal terminal detail omits decision audit",
+      "scenario": "ADM-051",
+      "status": "PARTIAL",
+      "summary": "A historical synthetic completed withdrawal now renders a Decision audit section with outcome, timestamp and rationale. Deciding admin is explicitly Not recorded, so actor provenance remains unproven.",
+      "steps": [
+        "Open the historical controlled Issue 493 completed withdrawal.",
+        "Inspect Decision audit: Completed outcome, 4 April 2026 decision time, recorded test rationale and deciding admin Not recorded.",
+        "Verify terminal detail is not actionable for a new decision.",
+        "Inspect audit text and Close control at all six calibrated Chrome sizes."
+      ],
+      "evidence": [
+        {
+          "url": "assets/targeted-20260914/ADM051-withdrawal-audit-1440x900.png",
+          "label": "Historical synthetic withdrawal decision audit; actor missing"
+        }
+      ],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM051-withdrawal-audit-360x800.png",
+              "label": "360×800 historical decision audit"
+            }
+          ],
+          "summary": "Decision audit fields readable and Close control contained; visually inspected."
+        },
+        {
+          "size": "390×844",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM051-withdrawal-audit-390x844.png",
+              "label": "390×844 historical decision audit"
+            }
+          ],
+          "summary": "Decision audit fields readable and Close control contained; visually inspected."
+        },
+        {
+          "size": "768×1024",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM051-withdrawal-audit-768x1024.png",
+              "label": "768×1024 historical decision audit"
+            }
+          ],
+          "summary": "Decision audit fields readable and Close control contained; visually inspected."
+        },
+        {
+          "size": "1024×768",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM051-withdrawal-audit-1024x768.png",
+              "label": "1024×768 historical decision audit"
+            }
+          ],
+          "summary": "Decision audit fields readable and Close control contained; visually inspected."
+        },
+        {
+          "size": "1280×800",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM051-withdrawal-audit-1280x800.png",
+              "label": "1280×800 historical decision audit"
+            }
+          ],
+          "summary": "Decision audit fields readable and Close control contained; visually inspected."
+        },
+        {
+          "size": "1440×900",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM051-withdrawal-audit-1440x900.png",
+              "label": "1440×900 historical decision audit"
+            }
+          ],
+          "summary": "Decision audit fields readable and Close control contained; visually inspected."
+        }
+      ],
+      "limitations": "Read-only historical data check. No new financial decision or transfer was executed, and actor backfill/current actor persistence was not proven. The masked account suffix belongs to the synthetic fixture."
+    },
+    {
+      "id": "ADM053-REC-001",
+      "title": "Grant award receipt reverses sender and recipient",
+      "scenario": "ADM-053",
+      "status": "FAIL",
+      "summary": "The actual grant-award receipt still lacks the recipient: the grant wallet identifies CIC Investor for the completed 100.00 disbursement, but its grant_disbursement receipt displays Recipient N/A. Sender direction is corrected, but party identity remains incomplete.",
+      "steps": [
+        "Open the controlled grant wallet and select its completed 100.00 Grant disbursed to user transaction.",
+        "Verify the wallet counterparty is CIC Investor.",
+        "Open the matching grant_disbursement HTML receipt.",
+        "Compare parties: sender is the grant, but recipient is N/A despite the known wallet counterparty.",
+        "Inspect the missing recipient field and receipt at all six calibrated Chrome sizes."
+      ],
+      "evidence": [
+        {
+          "url": "assets/targeted-20260914/ADM053-award-recipient-missing-1440x900.png",
+          "label": "Award receipt recipient N/A alongside known wallet counterparty"
+        }
+      ],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "FAIL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-award-recipient-missing-360x800.png",
+              "label": "360×800 award receipt missing recipient"
+            }
+          ],
+          "summary": "Receipt remains legible, but required award recipient is N/A at this viewport; visually confirmed."
+        },
+        {
+          "size": "390×844",
+          "status": "FAIL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-award-recipient-missing-390x844.png",
+              "label": "390×844 award receipt missing recipient"
+            }
+          ],
+          "summary": "Receipt remains legible, but required award recipient is N/A at this viewport; visually confirmed."
+        },
+        {
+          "size": "768×1024",
+          "status": "FAIL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-award-recipient-missing-768x1024.png",
+              "label": "768×1024 award receipt missing recipient"
+            }
+          ],
+          "summary": "Receipt remains legible, but required award recipient is N/A at this viewport; visually confirmed."
+        },
+        {
+          "size": "1024×768",
+          "status": "FAIL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-award-recipient-missing-1024x768.png",
+              "label": "1024×768 award receipt missing recipient"
+            }
+          ],
+          "summary": "Receipt remains legible, but required award recipient is N/A at this viewport; visually confirmed."
+        },
+        {
+          "size": "1280×800",
+          "status": "FAIL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-award-recipient-missing-1280x800.png",
+              "label": "1280×800 award receipt missing recipient"
+            }
+          ],
+          "summary": "Receipt remains legible, but required award recipient is N/A at this viewport; visually confirmed."
+        },
+        {
+          "size": "1440×900",
+          "status": "FAIL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-award-recipient-missing-1440x900.png",
+              "label": "1440×900 award receipt missing recipient"
+            }
+          ],
+          "summary": "Receipt remains legible, but required award recipient is N/A at this viewport; visually confirmed."
+        }
+      ],
+      "limitations": "Historical controlled award receipt; no new financial write. The original parties defect is not resolved. Additional contribution-receipt coverage is retained separately and does not justify award acceptance. PDF download and full wallet/Admin ledger reconciliation remain NOT RUN.",
+      "additionalCoverage": [
+        {
+          "summary": "Supporting receipt regression: a historical grant contribution correctly shows the controlled Pitcher as sender and the grant as recipient, gross/net 100.00, fees 0.00 and settled status. This is not the original grant-award direction.",
+          "steps": [
+            "Open the controlled historical initial grant contribution in the Pitcher wallet.",
+            "Open its HTML receipt and inspect contribution type, sender, recipient, gross amount, fees, net amount and settled state.",
+            "Inspect the receipt at all six calibrated Chrome sizes."
+          ],
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-grant-receipt-768x1024.png",
+              "label": "Historical contribution receipt, not award disbursement"
+            }
+          ],
+          "responsive": [
+            {
+              "size": "360×800",
+              "status": "PARTIAL",
+              "evidence": [
+                {
+                  "url": "assets/targeted-20260914/ADM053-grant-receipt-360x800.png",
+                  "label": "360×800 supporting contribution receipt"
+                }
+              ],
+              "summary": "Lower contribution-receipt values and Close/Download controls readable; sender/recipient outside this captured scroll position."
+            },
+            {
+              "size": "390×844",
+              "status": "PASS",
+              "evidence": [
+                {
+                  "url": "assets/targeted-20260914/ADM053-grant-receipt-390x844.png",
+                  "label": "390×844 supporting contribution receipt"
+                }
+              ],
+              "summary": "Contribution receipt parties, amounts and controls readable; this does not prove award receipt behavior."
+            },
+            {
+              "size": "768×1024",
+              "status": "PASS",
+              "evidence": [
+                {
+                  "url": "assets/targeted-20260914/ADM053-grant-receipt-768x1024.png",
+                  "label": "768×1024 supporting contribution receipt"
+                }
+              ],
+              "summary": "Contribution receipt parties, amounts and controls readable; this does not prove award receipt behavior."
+            },
+            {
+              "size": "1024×768",
+              "status": "PASS",
+              "evidence": [
+                {
+                  "url": "assets/targeted-20260914/ADM053-grant-receipt-1024x768.png",
+                  "label": "1024×768 supporting contribution receipt"
+                }
+              ],
+              "summary": "Contribution receipt parties, amounts and controls readable; this does not prove award receipt behavior."
+            },
+            {
+              "size": "1280×800",
+              "status": "PASS",
+              "evidence": [
+                {
+                  "url": "assets/targeted-20260914/ADM053-grant-receipt-1280x800.png",
+                  "label": "1280×800 supporting contribution receipt"
+                }
+              ],
+              "summary": "Contribution receipt parties, amounts and controls readable; this does not prove award receipt behavior."
+            },
+            {
+              "size": "1440×900",
+              "status": "PASS",
+              "evidence": [
+                {
+                  "url": "assets/targeted-20260914/ADM053-grant-receipt-1440x900.png",
+                  "label": "1440×900 supporting contribution receipt"
+                }
+              ],
+              "summary": "Contribution receipt parties, amounts and controls readable; this does not prove award receipt behavior."
+            }
+          ],
+          "limitations": "Original defect concerns a grant AWARD from grant to applicant, whereas this supporting check is a contribution from payer to grant. Original award receipt, both-wallet/Admin ledger reconciliation, new settlement and PDF download remain NOT RUN. No financial transaction was created."
+        }
+      ]
+    },
+    {
+      "id": "ADM053-CFG-001",
+      "title": "Saved grant configuration is lost on reopen",
+      "scenario": "ADM-053",
+      "status": "NOT RUN",
+      "summary": "Persistence retest not executed: the inspected controlled draft was already fully funded, so it did not provide the unfunded funding-stage branch required by the original defect.",
+      "steps": [],
+      "evidence": [],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "390×844",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "768×1024",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1024×768",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1280×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1440×900",
+          "status": "NOT RUN",
+          "evidence": []
+        }
+      ],
+      "limitations": "The existing controlled draft was already funded 1000/1000. Edit Step 2 exposed locked solo/public-contribution controls and group terms during unsaved interaction, but all edits were discarded through Back → Cancel. No save, publish or funding transaction occurred. Control inspection is not persistence acceptance; an appropriate isolated unfunded draft remains required."
+    },
+    {
+      "id": "ADM053-REPORT-001",
+      "title": "Grant detail invents comment and reporting obligations",
+      "scenario": "ADM-053",
+      "status": "PARTIAL",
+      "summary": "The controlled grant Details says tracking disabled, reporting not required and settings inactive; its existing disbursement says No comment provided and Reporting is not required. However, Overview still shows an active monthly cadence.",
+      "steps": [
+        "Open the controlled grant Details and verify Tracking Enabled No, Reporting Required No and settings Inactive.",
+        "Open its existing completed disbursement and expand details.",
+        "Verify No comment provided, Reporting is not required and no submitted reports.",
+        "Compare Overview, which still displays a contradictory active monthly cadence.",
+        "Inspect expanded grantor disbursement detail at all six calibrated Chrome sizes."
+      ],
+      "evidence": [
+        {
+          "url": "assets/targeted-20260914/ADM053-reporting-config.png",
+          "label": "Grant Details reporting disabled configuration"
+        },
+        {
+          "url": "assets/targeted-20260914/ADM053-reporting-disabled-1440x900.png",
+          "label": "Grantor disbursement no-comment and no-reporting state"
+        }
+      ],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "PARTIAL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-reporting-disabled-360x800.png",
+              "label": "360×800 expanded grantor reporting detail"
+            }
+          ],
+          "summary": "Captured right-hand table position omits comment/reporting truth text; left-scroll readability not verified."
+        },
+        {
+          "size": "390×844",
+          "status": "PARTIAL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-reporting-disabled-390x844.png",
+              "label": "390×844 expanded grantor reporting detail"
+            }
+          ],
+          "summary": "Captured right-hand table position omits comment/reporting truth text; left-scroll readability not verified."
+        },
+        {
+          "size": "768×1024",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-reporting-disabled-768x1024.png",
+              "label": "768×1024 expanded grantor reporting detail"
+            }
+          ],
+          "summary": "No comment and reporting-not-required text visible and readable; visually inspected."
+        },
+        {
+          "size": "1024×768",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-reporting-disabled-1024x768.png",
+              "label": "1024×768 expanded grantor reporting detail"
+            }
+          ],
+          "summary": "No comment and reporting-not-required text visible and readable; visually inspected."
+        },
+        {
+          "size": "1280×800",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-reporting-disabled-1280x800.png",
+              "label": "1280×800 expanded grantor reporting detail"
+            }
+          ],
+          "summary": "No comment and reporting-not-required text visible and readable; visually inspected."
+        },
+        {
+          "size": "1440×900",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM053-reporting-disabled-1440x900.png",
+              "label": "1440×900 expanded grantor reporting detail"
+            }
+          ],
+          "summary": "No comment and reporting-not-required text visible and readable; visually inspected."
+        }
+      ],
+      "limitations": "Grantor-side historical check only; recipient view and a fresh tracking-enabled/disabled award matrix are NOT RUN. Overview contradiction remains unresolved. At 360/390, captures are horizontally positioned right and omit the comment/reporting text; complete mobile readability is not established."
+    },
+    {
+      "id": "ADM054-WF-001",
+      "title": "No complete enforcement and appeal lifecycle",
+      "scenario": "ADM-054",
+      "status": "PARTIAL",
+      "summary": "A controlled metadata-only case completed new → investigating → enforced → appealed → restored → resolved → closed through the UI. Version 8, all reasons, immutable history and canonical support link persisted after reload.",
+      "steps": [
+        "Open the controlled synthetic operational case from its support handoff.",
+        "Correct the harness-supplied source reference by adding the canonical support request through Link record; retain the initial incorrect reference with an explanatory audit reason.",
+        "Transition through investigating, enforced, appealed, restored, resolved and closed, supplying a reason for every transition.",
+        "Reload and verify closed state, version 8, canonical source link and immutable history persist.",
+        "Cancel the source-URL-prefilled dialog after reload; confirm no duplicate case is created.",
+        "Inspect Reopen, Link record, Assign owner and canonical source controls at all six exact Chrome sizes."
+      ],
+      "evidence": [
+        {
+          "url": "assets/targeted-20260914/OPS-case-closed-1440x900.png",
+          "label": "Closed synthetic case, version 8, canonical link and immutable history"
+        }
+      ],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/OPS-case-closed-360x800.png",
+              "label": "360×800 closed synthetic operational case"
+            }
+          ],
+          "summary": "Closed-state Reopen, Link record, Assign owner and source controls visible and contained; visually inspected."
+        },
+        {
+          "size": "390×844",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/OPS-case-closed-390x844.png",
+              "label": "390×844 closed synthetic operational case"
+            }
+          ],
+          "summary": "Closed-state Reopen, Link record, Assign owner and source controls visible and contained; visually inspected."
+        },
+        {
+          "size": "768×1024",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/OPS-case-closed-768x1024.png",
+              "label": "768×1024 closed synthetic operational case"
+            }
+          ],
+          "summary": "Closed-state Reopen, Link record, Assign owner and source controls visible and contained; visually inspected."
+        },
+        {
+          "size": "1024×768",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/OPS-case-closed-1024x768.png",
+              "label": "1024×768 closed synthetic operational case"
+            }
+          ],
+          "summary": "Closed-state Reopen, Link record, Assign owner and source controls visible and contained; visually inspected."
+        },
+        {
+          "size": "1280×800",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/OPS-case-closed-1280x800.png",
+              "label": "1280×800 closed synthetic operational case"
+            }
+          ],
+          "summary": "Closed-state Reopen, Link record, Assign owner and source controls visible and contained; visually inspected."
+        },
+        {
+          "size": "1440×900",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/OPS-case-closed-1440x900.png",
+              "label": "1440×900 closed synthetic operational case"
+            }
+          ],
+          "summary": "Closed-state Reopen, Link record, Assign owner and source controls visible and contained; visually inspected."
+        }
+      ],
+      "limitations": "Metadata-only lifecycle: no real enforcement, account changes or customer contact. Assignment, reopen and actual cross-role effects remain NOT RUN. The initial sourceId was incorrectly entered by the test harness; it was not a correct initial save. The incorrect reference remains visibly retained and explained in the audit history."
+    },
+    {
+      "id": "ADM054-PRIV-001",
+      "title": "Profile report exposes full participant emails",
+      "scenario": "ADM-054",
+      "status": "NOT RUN",
+      "summary": "The role-comparison/audited-reveal profile-report privacy branch was not executed in this targeted run.",
+      "steps": [],
+      "evidence": [],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "390×844",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "768×1024",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1024×768",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1280×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1440×900",
+          "status": "NOT RUN",
+          "evidence": []
+        }
+      ],
+      "limitations": "Next check: inspect controlled profile-report detail as ordinary Admin and Super Admin, verify masking and any justified audited reveal. Synthetic operational-case screenshots are not profile-report privacy evidence."
+    },
+    {
+      "id": "ADM056-UNBLOCK-001",
+      "title": "Request unblock immediately unblocks the device",
+      "scenario": "ADM-056",
+      "status": "NOT RUN",
+      "summary": "No current deployed acceptance result recorded.",
+      "steps": [],
+      "evidence": [],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "390×844",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "768×1024",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1024×768",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1280×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1440×900",
+          "status": "NOT RUN",
+          "evidence": []
+        }
+      ],
+      "limitations": "NOT RUN: the authorized controlled Pitcher account had no blocked device available for this scenario. No device was blocked solely to manufacture this prerequisite."
+    },
+    {
+      "id": "ADM056-INCIDENT-001",
+      "title": "Security actions are not linked into an incident case",
+      "scenario": "ADM-056",
+      "status": "PARTIAL",
+      "summary": "Open security incident from the controlled user operations screen opened the correctly prefilled security case dialog. A blank opening reason kept Open case disabled; Cancel created no incident.",
+      "steps": [
+        "Open User operations for the controlled Pitcher account.",
+        "Select Open security incident.",
+        "Verify security case kind, Security user source type, matching source and affected-user identifiers, and /user-management deep link.",
+        "Leave opening reason blank and verify Open case remains disabled.",
+        "Inspect the prefilled dialog at all six exact Chrome sizes.",
+        "Cancel without creating a case."
+      ],
+      "evidence": [
+        {
+          "url": "assets/targeted-20260914/ADM056-incident-prefill-1440x900.png",
+          "label": "Prefilled security incident with required-reason guard"
+        }
+      ],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM056-incident-prefill-360x800.png",
+              "label": "360×800 prefilled security incident"
+            }
+          ],
+          "summary": "Prefilled fields and Cancel/disabled Open case are contained; visually inspected."
+        },
+        {
+          "size": "390×844",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM056-incident-prefill-390x844.png",
+              "label": "390×844 prefilled security incident"
+            }
+          ],
+          "summary": "Prefilled fields and Cancel/disabled Open case are contained; visually inspected."
+        },
+        {
+          "size": "768×1024",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM056-incident-prefill-768x1024.png",
+              "label": "768×1024 prefilled security incident"
+            }
+          ],
+          "summary": "Prefilled fields and Cancel/disabled Open case are contained; visually inspected."
+        },
+        {
+          "size": "1024×768",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM056-incident-prefill-1024x768.png",
+              "label": "1024×768 prefilled security incident"
+            }
+          ],
+          "summary": "Prefilled fields and Cancel/disabled Open case are contained; visually inspected."
+        },
+        {
+          "size": "1280×800",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM056-incident-prefill-1280x800.png",
+              "label": "1280×800 prefilled security incident"
+            }
+          ],
+          "summary": "Prefilled fields and Cancel/disabled Open case are contained; visually inspected."
+        },
+        {
+          "size": "1440×900",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/ADM056-incident-prefill-1440x900.png",
+              "label": "1440×900 prefilled security incident"
+            }
+          ],
+          "summary": "Prefilled fields and Cancel/disabled Open case are contained; visually inspected."
+        }
+      ],
+      "limitations": "Prefill and required-reason negative guard only. No security action, incident creation, enforcement linkage or cross-role notification was executed. No session logs, IP addresses, location details or email addresses are published."
+    },
+    {
+      "id": "ADM021-COMMS-001",
+      "title": "Suspension communications are missing",
+      "scenario": "ADM-021",
+      "status": "NOT RUN",
+      "summary": "No new pitch suspension/owner communication was executed in this targeted run.",
+      "steps": [],
+      "evidence": [],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "390×844",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "768×1024",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1024×768",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1280×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1440×900",
+          "status": "NOT RUN",
+          "evidence": []
+        }
+      ],
+      "limitations": "Next check: suspend an isolated pitch and reconcile one safe owner in-app notice, actual controlled inbox delivery and deep link. The generic Support delivery test does not prove suspension notifications."
+    },
+    {
+      "id": "ADM021-AUDIT-001",
+      "title": "Pitch lifecycle omits suspension actor and reason",
+      "scenario": "ADM-021",
+      "status": "NOT RUN",
+      "summary": "No new pitch suspension/restoration audit was executed in this targeted run.",
+      "steps": [],
+      "evidence": [],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "390×844",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "768×1024",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1024×768",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1280×800",
+          "status": "NOT RUN",
+          "evidence": []
+        },
+        {
+          "size": "1440×900",
+          "status": "NOT RUN",
+          "evidence": []
+        }
+      ],
+      "limitations": "Next check: suspend and restore an isolated pitch with unique reasons; reload authorized lifecycle history and verify actor, reason, time and before/after state. Metadata-only operational-case transitions do not prove pitch lifecycle audit."
+    },
+    {
+      "id": "ADM046-LINK-001",
+      "title": "Moderation, support and feedback cannot be linked",
+      "scenario": "ADM-046",
+      "status": "PARTIAL",
+      "summary": "Canonical support, feedback and moderation references were added through the UI to the same controlled case. After reload, version 10 and all three source types persisted. Support Open source returned to the Support queue.",
+      "steps": [
+        "Use the canonical Support Open source action and verify it returns to the Support queue.",
+        "Open the controlled synthetic feedback item and use its operational-case handoff control.",
+        "Add the canonical feedback record to the existing controlled case through Link record; observe version 9.",
+        "Open the controlled synthetic moderation thread and exercise its operational-case link.",
+        "Inspect Feedback and Moderation source controls at all six calibrated Chrome viewports.",
+        "Reload the same case and verify version 10 plus canonical support, feedback and moderation links persist."
+      ],
+      "evidence": [
+        {
+          "url": "assets/targeted-20260914/OPS-feedback-link-768x1024.png",
+          "label": "Feedback operational-case handoff control"
+        },
+        {
+          "url": "assets/targeted-20260914/OPS-moderation-link-1440x900.png",
+          "label": "Moderation existing linked-case control"
+        },
+        {
+          "url": "assets/targeted-20260914/OPS-linked-sources-persisted.png",
+          "label": "Same case version 10 after reload; support and feedback links visible"
+        }
+      ],
+      "responsive": [
+        {
+          "size": "360×800",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/OPS-moderation-link-360x800.png",
+              "label": "360×800 Moderation handoff"
+            },
+            {
+              "url": "assets/targeted-20260914/OPS-feedback-link-360x800.png",
+              "label": "360×800 Feedback handoff"
+            }
+          ],
+          "summary": "Feedback and Moderation source buttons are contained and readable; visually inspected."
+        },
+        {
+          "size": "390×844",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/OPS-moderation-link-390x844.png",
+              "label": "390×844 Moderation handoff"
+            },
+            {
+              "url": "assets/targeted-20260914/OPS-feedback-link-390x844.png",
+              "label": "390×844 Feedback handoff"
+            }
+          ],
+          "summary": "Feedback and Moderation source buttons are contained and readable; visually inspected."
+        },
+        {
+          "size": "768×1024",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/OPS-moderation-link-768x1024.png",
+              "label": "768×1024 Moderation handoff"
+            },
+            {
+              "url": "assets/targeted-20260914/OPS-feedback-link-768x1024.png",
+              "label": "768×1024 Feedback handoff"
+            }
+          ],
+          "summary": "Feedback and Moderation source buttons are contained and readable; visually inspected."
+        },
+        {
+          "size": "1024×768",
+          "status": "FAIL",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/OPS-moderation-link-1024x768.png",
+              "label": "1024×768 Moderation handoff"
+            },
+            {
+              "url": "assets/targeted-20260914/OPS-feedback-link-1024x768.png",
+              "label": "1024×768 Feedback handoff"
+            }
+          ],
+          "summary": "Source buttons are contained, but Feedback selected-detail text collapses into a single-character column."
+        },
+        {
+          "size": "1280×800",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/OPS-moderation-link-1280x800.png",
+              "label": "1280×800 Moderation handoff"
+            }
+          ],
+          "summary": "Feedback and Moderation source buttons are contained and readable; visually inspected."
+        },
+        {
+          "size": "1440×900",
+          "status": "PASS",
+          "evidence": [
+            {
+              "url": "assets/targeted-20260914/OPS-moderation-link-1440x900.png",
+              "label": "1440×900 Moderation handoff"
+            }
+          ],
+          "summary": "Feedback and Moderation source buttons are contained and readable; visually inspected."
+        }
+      ],
+      "limitations": "Cross-role authorization and complete reuse/handoff effects remain unverified. Six-size coverage concerns source controls, not six full journeys. Feedback selected-detail text collapses at 1024 pixels. Raw Feedback 1280/1440 captures were visually inspected but excluded from public assets because they expose a complete controlled-test mailbox address."
+    }
+  ],
+  "startedAt": "2026-09-14T04:05:58Z",
+  "timeboxMinutes": 90,
+  "coverageContract": "Targeted risk-based defect retest: one functional journey per affected behavior, reused real records for responsive control/display checks. Not six independent complete journey executions; historical campaign scores unchanged.",
+  "completedAt": "2026-09-14T04:54:48Z",
+  "testingEndedAt": "2026-09-14T04:54:00Z",
+  "publicationNote": "Completed refers to this user-approved targeted run, not closure of every defect or the historical full campaign. Unfinished acceptance remains explicitly PARTIAL, BLOCKED or NOT RUN."
+}
